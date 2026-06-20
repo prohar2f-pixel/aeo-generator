@@ -1,4 +1,4 @@
-const WORKER_URL = 'https://aeo-analyzer.prohar2f-gmail-com.workers.dev';
+const WORKER_URL = 'https://aeo-analyzer.prohar2f.workers.dev';
 
 async function analyzeUrl() {
   const url = document.getElementById('url').value.trim();
