@@ -17,10 +17,12 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Outfit', sans-serif;
   min-height: 100vh;
   padding: 32px 24px;
 }
+
+h1, h2, .form-card h2, .output-card h2 { font-family: 'Syne', sans-serif; }
 
 .hidden { display: none !important; }
 
