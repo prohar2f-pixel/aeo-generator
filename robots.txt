@@ -16,4 +16,10 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
+User-agent: YouBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://prohar2f-pixel.github.io/aeo-generator/sitemap.xml
