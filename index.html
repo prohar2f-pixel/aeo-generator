@@ -82,10 +82,40 @@
 <div class="wrap">
 
   <header>
-    <div class="badge"><span class="badge-dot"></span>AEO Generator · 2026</div>
+    <div class="badge"><span class="badge-dot"></span>Уже оптимизировано: <span id="counter-badge">...</span> сайтов</div>
     <h1>Сделай сайт видимым<br><span>для ChatGPT, Perplexity и Claude</span></h1>
     <p>Введи данные бизнеса — получи готовые файлы для AEO-оптимизации</p>
   </header>
+
+  <!-- КАК ЭТО РАБОТАЕТ -->
+  <div class="how-it-works">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-icon">🔗</div>
+      <div class="how-text">
+        <strong>Введи URL сайта</strong>
+        <span>Нажми «Анализировать» — ИИ изучит сайт и заполнит форму автоматически</span>
+      </div>
+    </div>
+    <div class="how-arrow">→</div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-icon">✏️</div>
+      <div class="how-text">
+        <strong>Проверь данные</strong>
+        <span>Исправь если нужно: имя, услуги, FAQ — всё уже заполнено за тебя</span>
+      </div>
+    </div>
+    <div class="how-arrow">→</div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-icon">⬇️</div>
+      <div class="how-text">
+        <strong>Скачай ZIP-архив</strong>
+        <span>Положи файлы на сайт — ChatGPT и Perplexity начнут тебя замечать</span>
+      </div>
+    </div>
+  </div>
 
   <div class="layout">
 
@@ -182,6 +212,15 @@
       <div class="output-actions">
         <button class="btn-copy" id="copy-btn" onclick="copyTab()">Копировать</button>
         <button class="btn-zip" onclick="downloadZip()">⬇ Скачать всё (ZIP)</button>
+      </div>
+
+      <div class="email-capture" id="email-capture">
+        <p class="email-caption">Хочешь чтобы мы настроили AEO за тебя? Оставь email — свяжемся:</p>
+        <div class="email-row">
+          <input id="lead-email" type="email" placeholder="твой@email.com">
+          <button class="btn-lead" id="lead-btn" onclick="submitLead()">Отправить</button>
+        </div>
+        <div id="lead-status" class="hint"></div>
       </div>
     </div>
 

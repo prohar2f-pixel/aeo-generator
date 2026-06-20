@@ -110,10 +110,10 @@ export default {
         }),
       });
       const aiJson = await aiRes.json();
+      if (!aiRes.ok) throw new Error(`openrouter_${aiRes.status}: ${JSON.stringify(aiJson).slice(0, 300)}`);
       const rawContent = aiJson.choices?.[0]?.message?.content || '';
-      // Extract JSON from response (Claude sometimes wraps in ```json blocks)
       const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) throw new Error('no_json_in_response');
+      if (!jsonMatch) throw new Error('no_json: ' + rawContent.slice(0, 200));
       aiResponse = JSON.parse(jsonMatch[0]);
     } catch (err) {
       return new Response(JSON.stringify({ ok: false, error: 'ai_failed', detail: err.message }), { status: 502, headers });

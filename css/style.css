@@ -135,3 +135,51 @@ header p { color: var(--muted); font-size: .95rem; }
   box-shadow: 0 0 20px rgba(139,92,246,.3);
 }
 .btn-zip:hover { box-shadow: 0 0 35px rgba(168,85,247,.55); transform: translateY(-1px); }
+
+/* ── КАК ЭТО РАБОТАЕТ ───────────────────── */
+.how-it-works {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.how-step {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: rgba(168,85,247,.06); border: 1px solid var(--border);
+  border-radius: 14px; padding: 16px 20px; flex: 1; min-width: 180px; max-width: 240px;
+  position: relative;
+}
+.how-num {
+  position: absolute; top: -10px; left: 16px;
+  background: var(--purple); color: #fff;
+  font-size: .65rem; font-weight: 700; width: 20px; height: 20px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+.how-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; }
+.how-text { display: flex; flex-direction: column; gap: 4px; }
+.how-text strong { font-size: .85rem; font-weight: 700; color: var(--text); }
+.how-text span { font-size: .72rem; color: var(--muted); line-height: 1.5; }
+.how-arrow { color: var(--purple); font-size: 1.2rem; flex-shrink: 0; }
+@media (max-width: 600px) { .how-arrow { display: none; } .how-step { max-width: 100%; } }
+
+/* ── EMAIL CAPTURE ──────────────────────── */
+.email-capture {
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.email-caption { font-size: .78rem; color: var(--muted); margin-bottom: 10px; }
+.email-row { display: flex; gap: 8px; }
+.email-row input {
+  flex: 1; background: rgba(255,255,255,.04); border: 1px solid var(--border);
+  border-radius: 10px; padding: 9px 12px;
+  color: var(--text); font-family: inherit; font-size: .84rem; outline: none;
+  transition: border-color .2s;
+}
+.email-row input:focus { border-color: var(--purple); }
+.btn-lead {
+  flex-shrink: 0; padding: 9px 18px;
+  background: rgba(168,85,247,.15); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--purple-light);
+  font-family: inherit; font-size: .82rem; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.btn-lead:hover { background: rgba(168,85,247,.28); border-color: var(--purple); }
+.btn-lead:disabled { opacity: .5; cursor: not-allowed; }

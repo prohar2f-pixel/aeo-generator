@@ -1,4 +1,59 @@
 const WORKER_URL = 'https://aeo-analyzer.prohar2f.workers.dev';
+const CONTACT_URL = 'https://prohar-contact-form.prohar2f.workers.dev';
+const COUNTER_URL = 'https://api.countapi.xyz/hit/aeo-gen-prohar/uses';
+const COUNTER_BASE = 47;
+
+async function loadCounter() {
+  try {
+    const res = await fetch('https://api.countapi.xyz/get/aeo-gen-prohar/uses');
+    const json = await res.json();
+    document.getElementById('counter-badge').textContent = COUNTER_BASE + (json.value || 0);
+  } catch {
+    document.getElementById('counter-badge').textContent = COUNTER_BASE;
+  }
+}
+
+async function incrementCounter() {
+  try {
+    const res = await fetch(COUNTER_URL);
+    const json = await res.json();
+    document.getElementById('counter-badge').textContent = COUNTER_BASE + (json.value || 0);
+  } catch { /* тихо игнорируем */ }
+}
+
+async function submitLead() {
+  const email = document.getElementById('lead-email').value.trim();
+  if (!email) return;
+  const btn = document.getElementById('lead-btn');
+  const status = document.getElementById('lead-status');
+  const url = document.getElementById('url').value.trim();
+  btn.disabled = true;
+  btn.textContent = '...';
+  try {
+    await fetch(CONTACT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'AEO Generator Lead',
+        phone: email,
+        email,
+        service: 'AEO-оптимизация: 5 000 ₽ (акция)',
+        comment: `Пользователь сгенерировал AEO-пакет${url ? ' для: ' + url : ''}`,
+      }),
+    });
+    status.textContent = '✓ Отправлено — свяжемся скоро';
+    status.style.color = '#4ade80';
+    document.getElementById('lead-email').value = '';
+  } catch {
+    status.textContent = '✗ Не получилось — напиши в Telegram @alex_prohar';
+    status.style.color = '#f87171';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Отправить';
+  }
+}
+
+loadCounter();
 
 async function analyzeUrl() {
   const url = document.getElementById('url').value.trim();
@@ -108,6 +163,7 @@ function generate() {
 
   document.getElementById('output-section').classList.remove('hidden');
   switchTab('robots');
+  incrementCounter();
 }
 
 function switchTab(name) {
