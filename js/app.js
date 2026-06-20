@@ -1,3 +1,63 @@
+const WORKER_URL = 'https://aeo-analyzer.prohar2f-gmail-com.workers.dev';
+
+async function analyzeUrl() {
+  const url = document.getElementById('url').value.trim();
+  if (!url || !url.startsWith('http')) {
+    alert('Введи корректный URL сайта (начинается с https://)');
+    return;
+  }
+
+  const btn = document.getElementById('analyzeBtn');
+  const status = document.getElementById('analyze-status');
+
+  btn.disabled = true;
+  status.className = 'hint loading';
+  status.textContent = '⏳ Анализирую сайт...';
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url }),
+    });
+    const json = await res.json();
+
+    if (!json.ok || !json.data) {
+      throw new Error(json.error || 'unknown_error');
+    }
+
+    const d = json.data;
+    const setVal = (id, val) => { if (val) document.getElementById(id).value = val; };
+
+    setVal('name', d.name);
+    setVal('jobTitle', d.jobTitle);
+    setVal('phone', d.phone);
+    setVal('email', d.email);
+    setVal('telegram', d.telegram);
+    setVal('city', d.city);
+
+    if (d.services && d.services.length > 0) {
+      document.getElementById('services').value = d.services
+        .map(s => `${s.name} | ${s.price} | `)
+        .join('\n');
+    }
+
+    if (d.faq && d.faq.length > 0) {
+      document.getElementById('faq').value = d.faq
+        .map(f => `${f.q} | ${f.a}`)
+        .join('\n');
+    }
+
+    status.className = 'hint success';
+    status.textContent = '✓ Форма заполнена автоматически — проверь и исправь если нужно';
+  } catch (err) {
+    status.className = 'hint error';
+    status.textContent = '✗ Ошибка: ' + err.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 function collectFormData() {
   const getVal = id => document.getElementById(id).value.trim();
 

@@ -26,7 +26,14 @@
 
       <div class="field">
         <label>URL сайта *</label>
-        <input id="url" type="url" placeholder="https://example.com">
+        <div class="url-row">
+          <input id="url" type="url" placeholder="https://example.com">
+          <button class="btn-analyze" id="analyzeBtn" onclick="analyzeUrl()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Анализировать
+          </button>
+        </div>
+        <div class="hint" id="analyze-status"></div>
       </div>
 
       <div class="row2">
