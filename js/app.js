@@ -23,7 +23,7 @@ async function analyzeUrl() {
     const json = await res.json();
 
     if (!json.ok || !json.data) {
-      throw new Error(json.error || 'unknown_error');
+      throw new Error((json.error || 'unknown_error') + (json.detail ? ': ' + json.detail : ''));
     }
 
     const d = json.data;

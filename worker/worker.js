@@ -1,5 +1,5 @@
 const ALLOWED_ORIGIN = 'https://prohar2f-pixel.github.io';
-const MODEL = 'anthropic/claude-haiku-4-5-20251001';
+const MODEL = 'anthropic/claude-3-haiku';
 const MAX_TEXT = 12000;
 
 function corsHeaders(origin) {
