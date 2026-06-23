@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Generator — сделай сайт первым в Google и Яндекс</title>
+<meta name="description" content="Генератор SEO-пакета: title, description, Open Graph, LocalBusiness Schema и чеклист для статического сайта. Бесплатный органический трафик за 2 минуты.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="Александр Прохоров">
+<link rel="canonical" href="https://aeo.aiprohar.ru/seo.html">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="mode-switch">
+    <a href="index.html" class="mode-tab">AEO · для ИИ</a>
+    <a href="seo.html" class="mode-tab active">SEO · для Google</a>
+  </nav>
+
+  <header>
+    <div class="badge"><span class="badge-dot"></span>Уже оптимизировано: <span id="counter-badge">...</span> сайтов</div>
+    <h1>Сделай сайт первым<br><span>в Google и Яндекс</span></h1>
+    <p>Введи данные бизнеса — получи готовые файлы для SEO-оптимизации</p>
+  </header>
+
+  <!-- КАК ЭТО РАБОТАЕТ -->
+  <div class="how-it-works">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-icon">🔗</div>
+      <div class="how-text">
+        <strong>Введи URL сайта</strong>
+        <span>Нажми «Анализировать» — ИИ изучит сайт и заполнит форму автоматически</span>
+      </div>
+    </div>
+    <div class="how-arrow">→</div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-icon">✏️</div>
+      <div class="how-text">
+        <strong>Проверь данные</strong>
+        <span>Исправь если нужно: имя, услуги, FAQ — всё уже заполнено за тебя</span>
+      </div>
+    </div>
+    <div class="how-arrow">→</div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-icon">⬇️</div>
+      <div class="how-text">
+        <strong>Скачай ZIP-архив</strong>
+        <span>Положи файлы на сайт — Google и Яндекс поднимут тебя в выдаче</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- ФОРМА -->
+    <div class="form-card">
+      <h2>Данные сайта</h2>
+
+      <div class="field">
+        <label>URL сайта *</label>
+        <div class="url-row">
+          <input id="url" type="url" placeholder="https://example.com">
+          <button class="btn-analyze" id="analyzeBtn" onclick="analyzeUrl()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Анализировать
+          </button>
+        </div>
+        <div class="hint" id="analyze-status"></div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Имя / Название *</label>
+          <input id="name" type="text" placeholder="Иван Петров">
+        </div>
+        <div class="field">
+          <label>Специальность</label>
+          <input id="jobTitle" type="text" placeholder="Массажист">
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Телефон</label>
+          <input id="phone" type="tel" placeholder="+79001234567">
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input id="email" type="email" placeholder="ivan@example.com">
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Telegram</label>
+          <input id="telegram" type="text" placeholder="@username">
+        </div>
+        <div class="field">
+          <label>Город</label>
+          <input id="city" type="text" placeholder="Москва">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Услуги</label>
+        <textarea id="services" placeholder="Массаж спины | 3000 | 60 минут&#10;Массаж шеи | 2000 | 30 минут"></textarea>
+        <div class="hint">Формат: Название | Цена | Длительность (каждая услуга с новой строки)</div>
+      </div>
+
+      <div class="field">
+        <label>FAQ — вопросы и ответы</label>
+        <textarea id="faq" placeholder="Сколько стоит сеанс? | От 2000 ₽, зависит от длительности&#10;Как записаться? | Напишите в Telegram"></textarea>
+        <div class="hint">Формат: Вопрос | Ответ (каждая пара с новой строки)</div>
+      </div>
+
+      <div class="field">
+        <label>Язык сайта</label>
+        <select id="lang">
+          <option value="ru">Русский (ru)</option>
+          <option value="en">English (en)</option>
+        </select>
+      </div>
+
+      <button class="btn-generate" onclick="generate()">Сгенерировать SEO-пакет</button>
+    </div>
+
+    <!-- ВЫВОД -->
+    <div id="output-section" class="output-card hidden">
+      <h2>Готовые файлы</h2>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="titledesc" onclick="switchTab('titledesc')">Title + Description</button>
+        <button class="tab-btn" data-tab="og" onclick="switchTab('og')">OG + Twitter</button>
+        <button class="tab-btn" data-tab="localbiz" onclick="switchTab('localbiz')">LocalBusiness</button>
+        <button class="tab-btn" data-tab="checklist" onclick="switchTab('checklist')">Чеклист</button>
+      </div>
+
+      <div class="tab-panel" data-panel="titledesc"><pre id="out-titledesc"></pre></div>
+      <div class="tab-panel hidden" data-panel="og"><pre id="out-og"></pre></div>
+      <div class="tab-panel hidden" data-panel="localbiz"><pre id="out-localbiz"></pre></div>
+      <div class="tab-panel hidden" data-panel="checklist"><pre id="out-checklist"></pre></div>
+
+      <div class="output-actions">
+        <button class="btn-copy" id="copy-btn" onclick="copyTab()">Копировать</button>
+        <button class="btn-zip" onclick="downloadZip()">⬇ Скачать всё (ZIP)</button>
+      </div>
+
+      <div class="email-capture" id="email-capture">
+        <p class="email-caption">Хочешь чтобы мы настроили SEO за тебя? Оставь email — свяжемся:</p>
+        <div class="email-row">
+          <input id="lead-email" type="email" placeholder="твой@email.com">
+          <button class="btn-lead" id="lead-btn" onclick="submitLead()">Отправить</button>
+        </div>
+        <div id="lead-status" class="hint"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="js/seo-generator.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/seo-app.js"></script>
+</body>
+</html>
