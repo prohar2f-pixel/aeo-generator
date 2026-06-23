@@ -1,9 +1,15 @@
-const ALLOWED_ORIGIN = 'https://prohar2f-pixel.github.io';
+const ALLOWED_ORIGINS = [
+  'https://aeo.aiprohar.ru',
+  'https://prohar2f-pixel.github.io',
+  'http://localhost:8000',
+  'http://127.0.0.1:8000',
+  'null',
+];
 const MODEL = 'anthropic/claude-3-haiku';
 const MAX_TEXT = 12000;
 
 function corsHeaders(origin) {
-  const allowed = origin === ALLOWED_ORIGIN ? ALLOWED_ORIGIN : '';
+  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : '';
   return {
     'Access-Control-Allow-Origin': allowed,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
