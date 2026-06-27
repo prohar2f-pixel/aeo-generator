@@ -1,5 +1,15 @@
 // seo-generator.js — чистые функции генерации SEO-файлов. Без DOM.
 
+// Корень сайта (origin без завершающего слэша): из любого URL страницы
+// делает адрес главной, чтобы og:url/og:image не получали лишний путь типа /index.html.
+function siteRoot(url) {
+  try {
+    return new URL(url).origin;
+  } catch {
+    return (url || '').replace(/\/+$/, '');
+  }
+}
+
 function buildTitle(data) {
   let t = data.name || 'Сайт';
   if (data.jobTitle) t += ' — ' + data.jobTitle;
@@ -27,7 +37,7 @@ function generateTitleDesc(data) {
 }
 
 function generateOgTwitter(data) {
-  const url = (data.url || '').replace(/\/$/, '');
+  const url = siteRoot(data.url);
   const title = buildTitle(data);
   const desc = buildDescription(data);
   const img = url + '/og-image.jpg';
@@ -46,7 +56,7 @@ function generateOgTwitter(data) {
 }
 
 function generateLocalBusiness(data) {
-  const url = (data.url || '').replace(/\/$/, '');
+  const url = siteRoot(data.url);
   const tgHandle = data.telegram
     ? (data.telegram.startsWith('@') ? data.telegram : '@' + data.telegram)
     : '';
