@@ -7,27 +7,79 @@
 <meta name="description" content="Генератор SEO-пакета: title, description, Open Graph, LocalBusiness Schema и чеклист для статического сайта. Бесплатный органический трафик за 2 минуты.">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="Александр Прохоров">
+<link rel="me" href="https://t.me/alex_prohar">
 <link rel="canonical" href="https://aeo.aiprohar.ru/seo.html">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://aeo.aiprohar.ru/seo.html#app",
+      "name": "SEO Generator",
+      "description": "Бесплатный генератор SEO-пакета для статических сайтов: title, meta description, Open Graph, Twitter Card, LocalBusiness Schema.org и чеклист. Готовые файлы за 2 минуты.",
+      "url": "https://aeo.aiprohar.ru/seo.html",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RUB"},
+      "author": {"@id": "https://aeo.aiprohar.ru/seo.html#author"}
+    },
+    {
+      "@type": "Person",
+      "@id": "https://aeo.aiprohar.ru/seo.html#author",
+      "name": "Александр Прохоров",
+      "jobTitle": "Веб-разработчик и специалист по SEO",
+      "url": "https://aiprohar.ru/",
+      "sameAs": ["https://t.me/alex_prohar"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://aeo.aiprohar.ru/seo.html#webpage",
+      "url": "https://aeo.aiprohar.ru/seo.html",
+      "name": "SEO Generator — сделай сайт первым в Google и Яндекс",
+      "description": "Генератор SEO-пакета: title, description, Open Graph, LocalBusiness Schema и чеклист для статического сайта. Бесплатный органический трафик за 2 минуты.",
+      "inLanguage": "ru",
+      "about": {"@id": "https://aeo.aiprohar.ru/seo.html#app"}
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://aiprohar.ru/assets/site.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+<header class="site-header">
+  <a href="https://aiprohar.ru/" class="site-logo">
+    <img src="https://aiprohar.ru/assets/logo.png" alt="Александр Прохоров">
+  </a>
+  <nav class="site-nav" id="siteNav">
+    <a href="https://aiprohar.ru/">Главная</a>
+    <a href="https://aiprohar.ru/aeo/">Аудит</a>
+    <a href="https://aeo.aiprohar.ru/">AEO Generator</a>
+    <a href="seo.html" class="active">SEO Generator</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Меню">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+</header>
+
 <div class="wrap">
 
-  <nav class="mode-switch">
-    <a href="index.html" class="mode-tab">AEO · для ИИ</a>
-    <a href="seo.html" class="mode-tab active">SEO · для Google</a>
-  </nav>
-
-  <header>
+  <div class="hero-section fi">
     <div class="badge"><span class="badge-dot"></span>Уже оптимизировано: <span id="counter-badge">...</span> сайтов</div>
     <h1>Сделай сайт первым<br><span>в Google и Яндекс</span></h1>
     <p>Введи данные бизнеса — получи готовые файлы для SEO-оптимизации</p>
-  </header>
+  </div>
 
   <!-- КАК ЭТО РАБОТАЕТ -->
   <div class="how-it-works">
-    <div class="how-step">
+    <div class="how-step fi">
       <div class="how-num">1</div>
       <div class="how-icon">🔗</div>
       <div class="how-text">
@@ -36,7 +88,7 @@
       </div>
     </div>
     <div class="how-arrow">→</div>
-    <div class="how-step">
+    <div class="how-step fi">
       <div class="how-num">2</div>
       <div class="how-icon">✏️</div>
       <div class="how-text">
@@ -45,7 +97,7 @@
       </div>
     </div>
     <div class="how-arrow">→</div>
-    <div class="how-step">
+    <div class="how-step fi">
       <div class="how-num">3</div>
       <div class="how-icon">⬇️</div>
       <div class="how-text">
@@ -58,7 +110,7 @@
   <div class="layout">
 
     <!-- ФОРМА -->
-    <div class="form-card">
+    <div class="form-card fi">
       <h2>Данные сайта</h2>
 
       <div class="field">
@@ -130,7 +182,7 @@
     </div>
 
     <!-- ВЫВОД -->
-    <div id="output-section" class="output-card hidden">
+    <div id="output-section" class="output-card hidden fi">
       <h2>Готовые файлы</h2>
 
       <div class="tabs">
@@ -164,9 +216,12 @@
 
 </div>
 
+<canvas id="smokeCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;mix-blend-mode:screen"></canvas>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="js/seo-generator.js"></script>
 <script src="js/shared.js"></script>
 <script src="js/seo-app.js"></script>
+<script src="https://aiprohar.ru/assets/fluid.js"></script>
+<script src="https://aiprohar.ru/assets/site.js"></script>
 </body>
 </html>
