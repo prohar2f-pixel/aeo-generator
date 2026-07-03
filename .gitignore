@@ -1,0 +1,20 @@
+# Секреты — реальные ключи только здесь, в git не попадают
+.env
+.env.*
+!.env.example
+
+# Cloudflare Worker
+worker/.dev.vars
+worker/.wrangler/
+.wrangler/
+
+# Зависимости
+node_modules/
+
+# Служебные папки инструментов
+.gstack/
+.impeccable/
+
+# Мусор ОС и редакторов
+.DS_Store
+Thumbs.db
