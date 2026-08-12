@@ -1,5 +1,5 @@
 /* Page-specific styles для AEO Generator.
-   Базовый дизайн-токены, шапка, кнопки, .fi — из https://aiprohar.ru/assets/site.css */
+   Базовый дизайн-токены, шапка, кнопки, .fi - из https://aiprohar.ru/assets/site.css */
 
 .hidden { display: none !important; }
 
@@ -204,6 +204,13 @@
 }
 .btn-lead:hover { background: rgba(168,85,247,.25); border-color: var(--p); }
 .btn-lead:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ── AI CRAWLER POLICY ──────────────────── */
+.bot-policy { border: 1px solid rgba(148,163,184,.2); border-radius: 12px; padding: 16px; margin: 0 0 18px; }
+.bot-policy legend { padding: 0 8px; font-weight: 700; color: #e2e8f0; }
+.check-row { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0; color: #cbd5e1; line-height: 1.45; cursor: pointer; }
+.check-row input { width: 18px; height: 18px; margin-top: 2px; flex: 0 0 auto; accent-color: #a855f7; }
+.data-note { margin: 0 0 16px; padding: 12px 14px; border: 1px solid rgba(245,158,11,.25); border-radius: 10px; background: rgba(245,158,11,.08); color: #cbd5e1; font-size: .78rem; line-height: 1.5; }
 
 /* ── RESPONSIVE ──────────────────────────── */
 @media (max-width: 600px) {

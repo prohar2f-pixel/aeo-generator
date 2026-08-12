@@ -4,44 +4,68 @@
 
 function generateRobots(data) {
   const sitemapUrl = data.url.replace(/\/$/, '') + '/sitemap.xml';
+  const searchDirective = data.allowAiSearch === false ? 'Disallow: /' : 'Allow: /';
+  const trainingDirective = data.allowAiTraining === true ? 'Allow: /' : 'Disallow: /';
   return `User-agent: *
 Allow: /
 
+User-agent: OAI-SearchBot
+${searchDirective}
+
 User-agent: GPTBot
-Allow: /
+${trainingDirective}
 
 User-agent: ChatGPT-User
 Allow: /
 
 User-agent: PerplexityBot
-Allow: /
+${searchDirective}
 
 User-agent: ClaudeBot
-Allow: /
+${searchDirective}
 
 User-agent: anthropic-ai
-Allow: /
+${trainingDirective}
 
 User-agent: YouBot
-Allow: /
+${searchDirective}
+
+User-agent: YandexAdditionalBot
+${searchDirective}
 
 User-agent: Applebot-Extended
-Allow: /
+${trainingDirective}
 
 Sitemap: ${sitemapUrl}`;
 }
 
 function generateSitemap(data) {
-  const url = data.url.replace(/\/$/, '');
+  const root = new URL(data.url);
+  const origin = root.origin;
   const today = new Date().toISOString().split('T')[0];
+  const candidates = ['/', ...(Array.isArray(data.pages) ? data.pages : [])];
+  const urls = [];
+  const seen = new Set();
+
+  candidates.forEach(candidate => {
+    try {
+      const page = new URL(candidate, origin + '/');
+      if (!['http:', 'https:'].includes(page.protocol) || page.origin !== origin) return;
+      page.hash = '';
+      if (seen.has(page.href)) return;
+      seen.add(page.href);
+      urls.push(page.href);
+    } catch { /* пропускаем некорректные URL */ }
+  });
+
+  const entries = urls.map(url => `  <url>
+    <loc>${url.replace(/&/g, '&amp;')}</loc>
+    <lastmod>${today}</lastmod>
+  </url>`).join('\n');
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${url}/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+${entries}
 </urlset>`;
 }
 
@@ -92,7 +116,7 @@ function generateJsonLd(data) {
     "@type": "WebPage",
     "@id": url + "/#webpage",
     "url": url + "/",
-    "name": data.name + (data.jobTitle ? " — " + data.jobTitle : ""),
+    "name": data.name + (data.jobTitle ? " - " + data.jobTitle : ""),
     "inLanguage": data.lang || "ru",
     "about": { "@id": url + "/#person" }
   };
