@@ -1,8 +1,11 @@
 User-agent: *
 Allow: /
 
-User-agent: GPTBot
+User-agent: OAI-SearchBot
 Allow: /
+
+User-agent: GPTBot
+Disallow: /
 
 User-agent: ChatGPT-User
 Allow: /
@@ -14,12 +17,15 @@ User-agent: ClaudeBot
 Allow: /
 
 User-agent: anthropic-ai
-Allow: /
+Disallow: /
 
 User-agent: YouBot
 Allow: /
 
 User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: YandexAdditionalBot
 Allow: /
 
-Sitemap: https://prohar2f-pixel.github.io/aeo-generator/sitemap.xml
+Sitemap: https://aeo.aiprohar.ru/sitemap.xml

@@ -1,4 +1,4 @@
-// shared.js — общие функции для AEO и SEO страниц
+// shared.js - общие функции для AEO и SEO страниц
 
 const WORKER_URL = 'https://aeo-analyzer.prohar2f.workers.dev';
 const CONTACT_URL = 'https://prohar-contact-form.prohar2f.workers.dev';
@@ -43,11 +43,11 @@ async function submitLead() {
         comment: `Пользователь сгенерировал пакет${url ? ' для: ' + url : ''}`,
       }),
     });
-    status.textContent = '✓ Отправлено — свяжемся скоро';
+    status.textContent = '✓ Отправлено - свяжемся скоро';
     status.style.color = '#4ade80';
     document.getElementById('lead-email').value = '';
   } catch {
-    status.textContent = '✗ Не получилось — напиши в Telegram @alex_prohar';
+    status.textContent = '✗ Не получилось - напиши в Telegram @alex_prohar';
     status.style.color = '#f87171';
   } finally {
     btn.disabled = false;
@@ -106,7 +106,7 @@ async function analyzeUrl() {
     }
 
     status.className = 'hint success';
-    status.textContent = '✓ Форма заполнена автоматически — проверь и исправь если нужно';
+    status.textContent = '✓ Форма заполнена автоматически - проверь и исправь если нужно';
   } catch (err) {
     status.className = 'hint error';
     status.textContent = '✗ Ошибка: ' + err.message;
@@ -135,6 +135,11 @@ function collectFormData() {
       })
     : [];
 
+  const pagesRaw = getVal('pages');
+  const pages = pagesRaw
+    ? pagesRaw.split('\n').map(line => line.trim()).filter(Boolean)
+    : [];
+
   return {
     url: getVal('url').replace(/\/$/, ''),
     name: getVal('name'),
@@ -144,6 +149,9 @@ function collectFormData() {
     telegram: getVal('telegram'),
     city: getVal('city'),
     lang: getVal('lang') || 'ru',
+    allowAiSearch: document.getElementById('allowAiSearch').checked,
+    allowAiTraining: document.getElementById('allowAiTraining').checked,
+    pages,
     services,
     faq
   };

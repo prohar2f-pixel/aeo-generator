@@ -1,3 +1,12 @@
 name = "aeo-analyzer"
 main = "worker.js"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[ratelimits]]
+name = "AUDIT_RATE_LIMITER"
+namespace_id = "2026081201"
+
+  [ratelimits.simple]
+  limit = 10
+  period = 60

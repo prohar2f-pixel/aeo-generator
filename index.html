@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AEO Generator — сделай сайт видимым для ИИ</title>
-<meta name="description" content="Генератор AEO-пакета: robots.txt, sitemap.xml, JSON-LD схема, мета-теги и FAQ для статического сайта. Скачай готовые файлы за 2 минуты.">
+<title>SEO + AI Visibility Generator - файлы для сайта</title>
+<meta name="description" content="Создайте robots.txt, sitemap.xml, метатеги и JSON-LD для SEO и доступности сайта в AI-поиске. Без обещаний гарантированного цитирования.">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="Александр Прохоров">
 <link rel="me" href="https://t.me/alex_prohar">
@@ -17,7 +17,7 @@
       "@type": "WebApplication",
       "@id": "https://aeo.aiprohar.ru/#app",
       "name": "AEO Generator",
-      "description": "Бесплатный генератор AEO-пакета для статических сайтов: robots.txt, sitemap.xml, JSON-LD Schema.org, мета-теги и FAQ. Готовые файлы за 2 минуты.",
+      "description": "Бесплатный генератор robots.txt, sitemap.xml, метатегов и JSON-LD для SEO и доступности сайта в AI-поиске.",
       "url": "https://aeo.aiprohar.ru/",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any",
@@ -36,11 +36,10 @@
       "@type": "WebPage",
       "@id": "https://aeo.aiprohar.ru/#webpage",
       "url": "https://aeo.aiprohar.ru/",
-      "name": "AEO Generator — сделай сайт видимым для ИИ",
-      "description": "Генератор AEO-пакета: robots.txt, sitemap.xml, JSON-LD схема, мета-теги и FAQ для статического сайта. Скачай готовые файлы за 2 минуты.",
+      "name": "SEO + AI Visibility Generator",
+      "description": "Генератор технической основы для SEO и AI-поиска: robots.txt, sitemap.xml, метатеги и JSON-LD.",
       "inLanguage": "ru",
-      "about": {"@id": "https://aeo.aiprohar.ru/#app"},
-      "speakable": {"@type": "SpeakableSpecification", "cssSelector": [".faq-item summary"]}
+      "about": {"@id": "https://aeo.aiprohar.ru/#app"}
     }
   ]
 }
@@ -74,8 +73,8 @@
 
   <div class="hero-section fi">
     <div class="badge"><span class="badge-dot"></span>Уже оптимизировано: <span id="counter-badge">...</span> сайтов</div>
-    <h1>Сделай сайт видимым<br><span>для ChatGPT, Perplexity и Claude</span></h1>
-    <p>Введи данные бизнеса — получи готовые файлы для AEO-оптимизации</p>
+    <h1>Подготовь техническую основу<br><span>для SEO и AI-поиска</span></h1>
+    <p>Создай robots.txt, sitemap.xml, метатеги и JSON-LD. Эти файлы помогают роботам читать сайт, но не гарантируют позицию или цитирование.</p>
   </div>
 
   <!-- КАК ЭТО РАБОТАЕТ -->
@@ -85,7 +84,7 @@
       <div class="how-icon">🔗</div>
       <div class="how-text">
         <strong>Введи URL сайта</strong>
-        <span>Нажми «Анализировать» — ИИ изучит сайт и заполнит форму автоматически</span>
+        <span>Нажми «Анализировать» - сервис прочитает публичную страницу и заполнит форму автоматически</span>
       </div>
     </div>
     <div class="how-arrow">→</div>
@@ -94,7 +93,7 @@
       <div class="how-icon">✏️</div>
       <div class="how-text">
         <strong>Проверь данные</strong>
-        <span>Исправь если нужно: имя, услуги, FAQ — всё уже заполнено за тебя</span>
+        <span>Проверь имя, услуги и FAQ: автоматическое извлечение может ошибаться</span>
       </div>
     </div>
     <div class="how-arrow">→</div>
@@ -103,7 +102,7 @@
       <div class="how-icon">⬇️</div>
       <div class="how-text">
         <strong>Скачай ZIP-архив</strong>
-        <span>Положи файлы на сайт — ChatGPT и Perplexity начнут тебя замечать</span>
+        <span>Проверь файлы, добавь их на сайт и отслеживай индексацию и реальные упоминания</span>
       </div>
     </div>
   </div>
@@ -166,10 +165,29 @@
       </div>
 
       <div class="field">
-        <label>FAQ — вопросы и ответы</label>
+        <label>FAQ - вопросы и ответы</label>
         <textarea id="faq" placeholder="Сколько стоит сеанс? | От 2000 ₽, зависит от длительности&#10;Как записаться? | Напишите в Telegram"></textarea>
         <div class="hint">Формат: Вопрос | Ответ (каждая пара с новой строки)</div>
       </div>
+
+      <div class="field">
+        <label>Дополнительные страницы для sitemap.xml</label>
+        <textarea id="pages" placeholder="/services/&#10;/about/&#10;https://example.com/cases/"></textarea>
+        <div class="hint">Один URL или путь с новой строки. Ссылки с другого домена будут исключены.</div>
+      </div>
+
+      <fieldset class="bot-policy">
+        <legend>Политика AI-ботов</legend>
+        <label class="check-row">
+          <input id="allowAiSearch" type="checkbox" checked>
+          <span>Разрешить AI-поиск: OAI-SearchBot, PerplexityBot, ClaudeBot и YandexAdditionalBot</span>
+        </label>
+        <label class="check-row">
+          <input id="allowAiTraining" type="checkbox">
+          <span>Разрешить использование контента обучающими ботами: GPTBot, anthropic-ai и Applebot-Extended</span>
+        </label>
+        <div class="hint">Поиск и обучение настраиваются независимо. Разрешение робота не гарантирует упоминание или ссылку.</div>
+      </fieldset>
 
       <div class="field">
         <label>Язык сайта</label>
@@ -179,7 +197,9 @@
         </select>
       </div>
 
-      <button class="btn-generate" onclick="generate()">Сгенерировать AEO-пакет</button>
+      <p class="data-note">При автоматическом анализе текст страницы передаётся через OpenRouter выбранному AI-провайдеру. Не анализируйте закрытые страницы и персональные данные.</p>
+
+      <button class="btn-generate" onclick="generate()">Сгенерировать SEO + AI пакет</button>
     </div>
 
     <!-- ВЫВОД -->
@@ -206,7 +226,7 @@
       </div>
 
       <div class="email-capture" id="email-capture">
-        <p class="email-caption">Хочешь чтобы мы настроили AEO за тебя? Оставь email — свяжемся:</p>
+        <p class="email-caption">Нужен полный SEO + AI Visibility Audit и внедрение? Оставь email:</p>
         <div class="email-row">
           <input id="lead-email" type="email" placeholder="твой@email.com">
           <button class="btn-lead" id="lead-btn" onclick="submitLead()">Отправить</button>
