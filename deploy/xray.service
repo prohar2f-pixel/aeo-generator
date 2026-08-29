@@ -1,0 +1,40 @@
+[Unit]
+Description=Lagom Xray client for AEO Analyzer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=xray
+Group=xray
+ExecStartPre=+/usr/local/libexec/aeo-xray-refresh
+ExecStart=/usr/local/bin/xray run -config /etc/xray/config.json
+Restart=on-failure
+RestartSec=5s
+UMask=0027
+
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadWritePaths=/etc/xray
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+LockPersonality=true
+MemoryDenyWriteExecute=false
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+TasksMax=64
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

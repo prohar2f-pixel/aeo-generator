@@ -48,20 +48,57 @@ function isBlockedIpv4(hostname) {
     || (a === 169 && b === 254)
     || (a === 172 && b >= 16 && b <= 31)
     || (a === 192 && (b === 0 || b === 168))
+    || (a === 192 && b === 88 && bytes[2] === 99)
     || (a === 198 && (b === 18 || b === 19))
+    || (a === 198 && b === 51 && bytes[2] === 100)
+    || (a === 203 && b === 0 && bytes[2] === 113)
     || a >= 224;
+}
+
+function parseIpv6Words(hostname) {
+  const parts = hostname.split('::');
+  if (parts.length > 2) return null;
+
+  const parseSide = side => {
+    if (!side) return [];
+    const words = [];
+    for (const token of side.split(':')) {
+      if (!/^[0-9a-f]{1,4}$/i.test(token)) return null;
+      words.push(Number.parseInt(token, 16));
+    }
+    return words;
+  };
+
+  const left = parseSide(parts[0]);
+  const right = parseSide(parts[1] || '');
+  if (!left || !right) return null;
+  if (parts.length === 1) return left.length === 8 ? left : null;
+  const missing = 8 - left.length - right.length;
+  if (missing < 1) return null;
+  return [...left, ...Array(missing).fill(0), ...right];
 }
 
 function isBlockedIpv6(hostname) {
   const normalized = hostname.toLowerCase().replace(/^\[|\]$/g, '');
-  if (!normalized.includes(':')) return false;
-  if (normalized === '::' || normalized === '::1') return true;
-  if (normalized.startsWith('fc') || normalized.startsWith('fd')) return true;
-  if (/^fe[89ab]/.test(normalized)) return true;
-  if (normalized.startsWith('ff')) return true;
-  if (normalized.startsWith('2001:db8:')) return true;
-  const mappedIpv4 = normalized.match(/(?:^|:)ffff:(\d+\.\d+\.\d+\.\d+)$/);
-  return mappedIpv4 ? isBlockedIpv4(mappedIpv4[1]) : false;
+  const words = parseIpv6Words(normalized);
+  if (!words) return true;
+
+  const allZero = words.every(word => word === 0);
+  const loopback = words.slice(0, 7).every(word => word === 0) && words[7] === 1;
+  const uniqueLocal = (words[0] & 0xfe00) === 0xfc00;
+  const linkLocal = (words[0] & 0xffc0) === 0xfe80;
+  const multicast = (words[0] & 0xff00) === 0xff00;
+  const documentation = words[0] === 0x2001 && words[1] === 0x0db8;
+  const discardOnly = words[0] === 0x0100 && words.slice(1, 4).every(word => word === 0);
+  const sixToFour = words[0] === 0x2002;
+  const nat64 = words[0] === 0x0064 && words[1] === 0xff9b && words.slice(2, 6).every(word => word === 0);
+  const ipv4Mapped = words.slice(0, 5).every(word => word === 0) && words[5] === 0xffff;
+
+  if (ipv4Mapped) {
+    const ipv4 = [words[6] >> 8, words[6] & 0xff, words[7] >> 8, words[7] & 0xff].join('.');
+    return isBlockedIpv4(ipv4);
+  }
+  return allZero || loopback || uniqueLocal || linkLocal || multicast || documentation || discardOnly || sixToFour || nat64;
 }
 
 function isBlockedHostname(rawHostname) {

@@ -1,5 +1,7 @@
 # Секреты — реальные ключи только здесь, в git не попадают
 .env
+subscription-url
+config.json
 .env.*
 !.env.example
 
@@ -10,6 +12,9 @@ worker/.wrangler/
 
 # Зависимости
 node_modules/
+*.log
+*.pid
+runtime/
 
 # Служебные папки инструментов
 .gstack/

@@ -1,0 +1,15 @@
+{
+  "name": "aeo-generator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server/http-server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "undici": "7.29.0"
+  }
+}

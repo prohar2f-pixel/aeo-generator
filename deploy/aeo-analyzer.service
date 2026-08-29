@@ -1,0 +1,43 @@
+[Unit]
+Description=AiProhar SEO and AI Visibility Analyzer
+After=network-online.target
+Wants=network-online.target
+After=xray.service
+Wants=xray.service
+
+[Service]
+Type=simple
+User=aeo-analyzer
+Group=aeo-analyzer
+WorkingDirectory=/opt/aeo-analyzer/current
+EnvironmentFile=/etc/aeo-analyzer/environment
+ExecStart=/usr/bin/node server/http-server.js
+Restart=on-failure
+RestartSec=5s
+UMask=0077
+
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+LockPersonality=true
+MemoryDenyWriteExecute=false
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+SystemCallFilter=@system-service pkey_alloc pkey_free pkey_mprotect
+TasksMax=64
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

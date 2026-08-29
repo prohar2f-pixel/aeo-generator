@@ -1,6 +1,6 @@
 // shared.js - общие функции для AEO и SEO страниц
 
-const WORKER_URL = 'https://aeo-analyzer.prohar2f.workers.dev';
+const WORKER_URL = 'https://api.aiprohar.ru/v1/analyze';
 const CONTACT_URL = 'https://prohar-contact-form.prohar2f.workers.dev';
 const COUNTER_URL = 'https://api.countapi.xyz/hit/aeo-gen-prohar/uses';
 const COUNTER_BASE = 47;
